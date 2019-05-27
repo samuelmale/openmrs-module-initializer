@@ -20,6 +20,7 @@ README.html
 api/bin
 omod/bin
 api/.classpath
+api-2.2/.classpath
 api/.project
 api/.settings/*
 api/target/*

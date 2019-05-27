@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openmrs.module.initializer.DomainBaseModuleContextSensitiveTest;
+import org.openmrs.module.initializer.api.attributes.types.AttributeTypeLoader;
 import org.openmrs.module.initializer.api.c.ConceptsLoader;
 import org.openmrs.module.initializer.api.drugs.DrugsLoader;
 import org.openmrs.module.initializer.api.freq.OrderFrequenciesLoader;
@@ -80,6 +81,9 @@ public class LoadersIntegrationTest extends DomainBaseModuleContextSensitiveTest
 	@Autowired
 	private MetadataMappingsLoader mdmLoader;
 	
+	@Autowired
+	private AttributeTypeLoader atLoader;
+	
 	@Test
 	public void getLoaders_shouldBeUnivoquelyOrdered() {
 		
@@ -112,6 +116,8 @@ public class LoadersIntegrationTest extends DomainBaseModuleContextSensitiveTest
 		Assert.assertThat(idSourcesLoader.getOrder(), lessThan(drugsLoader.getOrder()));
 		count++;
 		Assert.assertThat(drugsLoader.getOrder(), lessThan(freqLoader.getOrder()));
+		count++;
+		Assert.assertThat(freqLoader.getOrder(), lessThan(atLoader.getOrder()));
 		count++;
 		
 		Assert.assertEquals(getService().getLoaders().size(), count);
